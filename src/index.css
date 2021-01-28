@@ -12,6 +12,10 @@ body {
   filter: drop-shadow(0 0 1rem black);
 }
 
+.comp:hover {
+  filter: drop-shadow(0 0 1rem royalblue);
+}
+
 .marg {
   margin: 20px;
 }
