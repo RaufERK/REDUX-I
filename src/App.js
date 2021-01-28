@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import Controls from "./components/controls/Controls";
+import Counter from "./components/counter/Counter";
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import List from "./components/List/List";
+import { SET_USERS } from './redux/reducer'
 
 function App() {
+  const dispatch = useDispatch()
+  const fetchUsers = async () => {
+    const result = await fetch('https://jsonplaceholder.typicode.com/users')
+    const usersList = await result.json()
+    dispatch({ type: SET_USERS, payload: usersList })
+  }
+
+  useEffect(() => {
+    fetchUsers();
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <List />
+      <Controls />
+      <Counter />
     </div>
   );
 }
